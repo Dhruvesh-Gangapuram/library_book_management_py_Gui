@@ -1,0 +1,97 @@
+create database dbmsa1;
+
+use dbmsa1;
+
+create table books(
+    -> year int,
+    -> title varchar(225),
+    -> price int,
+    -> isbn int PRIMARY KEY,
+    -> Author_name varchar(225)
+    -> );
+Query OK, 0 rows affected (2.73 sec)
+
+create table author(
+    -> Author_name VARCHAR(225) PRIMARY KEY,
+    -> address varchar(225),
+    -> URL varchar(225)
+    -> );
+Query OK, 0 rows affected (3.77 sec)
+
+alter table books add
+    -> (
+    -> FOREIGN KEY  (Author_name) REFERENCES author(Author_name)
+    -> );
+Query OK, 0 rows affected (3.95 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+create table published_by(
+    -> pname varchar(250),
+    -> address varchar(250),
+    -> phone int,
+    -> URL varchar(250),
+    -> isbn int,
+    -> FOREIGN KEY (isbn) REFERENCES books(isbn)
+    -> );
+
+create table customer(
+    -> name varchar(250),
+    -> email varchar(250) PRIMARY KEY,
+    -> address varchar(250),
+    -> phone varchar(250)
+    -> );
+
+create table warehouse(
+    -> code int PRIMARY KEY,
+    -> phone int,
+    -> address varchar(250),
+    -> isbn int,
+    -> stock int,
+    -> FOREIGN KEY (isbn) REFERENCES books(isbn)
+    -> );
+
+create table shopping_basket(
+    -> basket_id int PRIMARY KEY,
+    -> email varchar(250),
+    -> isbn int,
+    -> FOREIGN KEY (email) REFERENCES customer(email),
+    -> FOREIGN KEY (isbn) REFERENCES books(isbn)
+    -> );
+
+insert into author values("Dale Carnegie", "new york" , "www.DaleCarnegie.com");
+insert into author values("Brian Tracy", "london" , "www.BrianTracy.com");
+insert into author values("David Schwartz", "Brinkley" , "www.DavidSchwartz.com");
+
+insert into books values(2009, "How to Win Friends and Influence People", "230", 6437, "Dale Carnegie");
+insert into books values(2006, "Focal Point" , "250", 0276, "Brian Tracy");
+insert into books values(2007, "The Magic of Thinking Big" , 360, 6758, "David Schwartz");
+insert into books values(1985, "Marketing Today" , 560, 6458, "David Schwartz");
+insert into books values(1985, "Time Management" , 560, 6428, "Brian Tracy");
+
+insert into customer values("Dhruvesh","gangapuramdhruvesh@gmail.com", "airoli" ,892821017);
+insert into customer values("gaurav","gaurav_37@gmail.com", "vashi " ,892673830);
+insert into customer values("manish","manish_05@gmail.com", "bandra" ,954673830);
+insert into customer values("Harshad  ","harshad077@gmail.com", "panvel" ,892673017);
+
+
+insert into published_by values("Chand Publishing","new delhi",92872634, "www.ChandPublishing.com" ,276);
+insert into published_by values("Chand Publishing","new delhi",92872634, "www.ChandPublishing.com" ,6428);
+insert into published_by values("Chand Publishing","new delhi",92872634, "www.ChandPublishing.com" ,6437);
+insert into published_by values("Harper Collins Publishers","new york",12040448, "www.HarperCollinsPublishers.com" ,6458);
+insert into published_by values("Harper Collins Publishers","new york",12040448, "www.HarperCollinsPublishers.com" ,6758);
+
+insert into shopping_basket values(121, "gangapuramdhruvesh@gmail.com", 276);
+insert into shopping_basket values(131, "gangapuramdhruvesh@gmail.com", 6428);
+insert into shopping_basket values(211, "harshad077@gmail.com", 6437);
+
+insert into warehouse values(6776,987654321,"ratnagiri", 276, 23);
+insert into warehouse values(6776,987654321,"ratnagiri", 6428, 34);
+insert into warehouse values(6776,987654321,"ratnagiri", 6437, 4);
+insert into warehouse values(6776,987654321,"ratnagiri",6458 , 4);
+insert into warehouse values(6776,987654321,"ratnagiri", 6758, 4);
+
+insert into warehouse values(3443, 986543217,"Thane", 276, 26);
+insert into warehouse values(3443, 986543217,"Thane", 6428, 20);
+insert into warehouse values(3443, 986543217,"Thane", 6437, 27);
+insert into warehouse values(3443, 986543217,"Thane", 6458, 27);
+insert into warehouse values(3443, 986543217,"Thane", 6758, 0);
