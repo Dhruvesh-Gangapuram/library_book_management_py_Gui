@@ -231,8 +231,4 @@ customer.grid(row = 0, column = 4)
 close = tk.Button(main_win,text="close",height=3,width=10,command=main_win.destroy)
 close.pack(side = TOP,anchor=NE)
 
-# table_head()
-# empty_frame()
-
-
 main_win.mainloop()
